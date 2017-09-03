@@ -8,6 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+        </Grid.RowDefinitions>
         <local:PadGrid x:Name="PadGrid"></local:PadGrid>
+        <local:SpeechModule Grid.Row="1"></local:SpeechModule>
     </Grid>
 </Page>

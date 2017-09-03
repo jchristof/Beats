@@ -5,7 +5,7 @@ using Windows.Media.Audio;
 using Windows.Storage;
 
 namespace Beats {
-    public class AudioLoader {
+    public class AudioLoader : IDisposable{
         public Dictionary<BeatType, AudioFileInputNode> BeatMap = new Dictionary<BeatType, AudioFileInputNode>();
         private readonly AudioGraph audioGraph;
         private readonly StorageFolder audioFolder;
@@ -31,5 +31,12 @@ namespace Beats {
             
             throw new InvalidOperationException($"Unable to load audio file {filename}");
         }
+
+        public void Dispose() {
+            foreach (KeyValuePair<BeatType, AudioFileInputNode> audioFileInputNode in BeatMap) {
+                audioFileInputNode.Value.Dispose();
+            }
+        }
+
     }
 }

@@ -98,6 +98,7 @@
     <Compile Include="AudioLoader.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="BeatType.cs" />
+    <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -105,6 +106,10 @@
       <DependentUpon>PadGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpeechModule.xaml.cs">
+      <DependentUpon>SpeechModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SpeechNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -136,6 +141,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PadGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpeechModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,7 +5,7 @@ using Windows.Media.Audio;
 using Windows.Storage;
 
 namespace Beats {
-    public class AudioSystem {
+    public class AudioSystem : IDisposable{
 
         private AudioGraph AudioGraph { get; set; }
         private AudioDeviceOutputNode DeviceOutput { get; set; }
@@ -46,6 +46,12 @@ namespace Beats {
         public void Play(BeatType beatType) {
             AudioLoader.BeatMap[beatType].Reset();
             AudioLoader.BeatMap[beatType].Start();
+        }
+
+        public void Dispose() {
+            AudioLoader.Dispose();
+            DeviceOutput.Dispose();
+            AudioGraph.Dispose();
         }
     }
 }
