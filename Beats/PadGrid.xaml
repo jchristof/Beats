@@ -18,8 +18,28 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ToggleButton HorizontalAlignment="Stretch"
+        <ToggleButton Tag="0"
+                      HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
+                      ClickMode="Press"
+                      Click="ButtonBase_OnClick"/>
+        <ToggleButton Tag="1"
+                      Grid.Row="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      ClickMode="Press"
+                      Click="ButtonBase_OnClick"/>
+        <ToggleButton Tag="2"
+                      Grid.Column="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      ClickMode="Press"
+                      Click="ButtonBase_OnClick"/>
+        <ToggleButton Tag="3"
+                      Grid.Column="1" Grid.Row="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      ClickMode="Press"
                       Click="ButtonBase_OnClick"/>
     </Grid>
 </UserControl>
