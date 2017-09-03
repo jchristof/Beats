@@ -39,6 +39,7 @@ namespace Beats {
 
             foreach (KeyValuePair<BeatType, AudioFileInputNode> audioFileInputNode in AudioLoader.BeatMap) {
                 audioFileInputNode.Value.AddOutgoingConnection(DeviceOutput);
+                audioFileInputNode.Value.Stop();
             }
         }
 

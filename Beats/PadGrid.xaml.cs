@@ -1,8 +1,10 @@
 ﻿
 using System;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 
 namespace Beats {
     public sealed partial class PadGrid {
@@ -27,5 +29,14 @@ namespace Beats {
             audioSystem.Play((BeatType)ordinal);
         }
 
+        private void Grid_KeyDown(object sender, KeyRoutedEventArgs e) {
+
+            switch (e.Key) {
+                case VirtualKey.Q: audioSystem.Play((BeatType)0); break;
+                case VirtualKey.A: audioSystem.Play((BeatType)1); break;
+                case VirtualKey.W: audioSystem.Play((BeatType)2); break;
+                case VirtualKey.S: audioSystem.Play((BeatType)3); break;
+            }
+        }
     }
 }
