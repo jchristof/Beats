@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Storage;
 
@@ -10,6 +11,7 @@ namespace Beats {
         private AudioGraph AudioGraph { get; set; }
         private AudioDeviceOutputNode DeviceOutput { get; set; }
         private AudioLoader AudioLoader { get; set; }
+        private FrameNode FrameNode { get; set; }
 
         public async Task Create() {
             AudioGraphSettings settings = new AudioGraphSettings(Windows.Media.Render.AudioRenderCategory.Media);
@@ -41,6 +43,10 @@ namespace Beats {
                 audioFileInputNode.Value.AddOutgoingConnection(DeviceOutput);
                 audioFileInputNode.Value.Stop();
             }
+
+            FrameNode = new FrameNode();
+            FrameNode.Create(AudioGraph, DeviceOutput);
+            FrameNode.Start();
         }
 
         public void Play(BeatType beatType) {
