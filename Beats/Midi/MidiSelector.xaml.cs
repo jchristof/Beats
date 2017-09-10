@@ -65,6 +65,9 @@ namespace Beats.Midi {
         private IMidiOutPort midiOutPort;
 
         public void SendOut(byte channel, byte note, byte velocity) {
+            if (midiOutPort == null)
+                return;
+
             IMidiMessage midiMessageToSend = new MidiNoteOnMessage(channel, note, velocity);
 
             midiOutPort.SendMessage(midiMessageToSend);
