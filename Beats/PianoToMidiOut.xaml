@@ -16,6 +16,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <midi:MidiSelector x:Name="MidiSelector"/>
-        <local:PianoControl Grid.Row="1" KeyPressedEvent="PianoControl_OnKeyPressedEvent"/>
+        <local:PianoControl Grid.Row="1" KeyPressedEvent="PianoControl_OnKeyPressedEvent" KeyReleasedEvent="PianoControl_OnKeyReleasedEvent"/>
     </Grid>
 </UserControl>
