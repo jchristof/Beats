@@ -46,7 +46,7 @@ namespace Beats {
 
             FrameNode = new FrameNode();
             FrameNode.Create(AudioGraph, DeviceOutput);
-            FrameNode.Start();
+            //FrameNode.Start();
         }
 
         public void Play(BeatType beatType) {
