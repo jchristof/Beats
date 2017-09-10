@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 namespace Beats.Midi {
     public sealed partial class MidiSelector  {
         public MidiSelector() {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         MidiDeviceWatcher inputDeviceWatcher;
@@ -64,11 +64,15 @@ namespace Beats.Midi {
 
         private IMidiOutPort midiOutPort;
 
-        public void SendOut(byte channel, byte note, byte velocity) {
+        public void SendOut(byte channel, byte note, byte velocity, MidiMessageType messageType) {
             if (midiOutPort == null)
                 return;
 
-            IMidiMessage midiMessageToSend = new MidiNoteOnMessage(channel, note, velocity);
+            IMidiMessage midiMessageToSend = null;
+            if (messageType == MidiMessageType.NoteOn)
+                midiMessageToSend = new MidiNoteOnMessage(channel, note, velocity);
+            else
+                midiMessageToSend = new MidiNoteOffMessage(channel, note, velocity);
 
             midiOutPort.SendMessage(midiMessageToSend);
         }
