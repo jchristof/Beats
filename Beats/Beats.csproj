@@ -106,11 +106,18 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Midi\MidiDeviceWatcher.cs" />
+    <Compile Include="Midi\MidiSelector.xaml.cs">
+      <DependentUpon>MidiSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PadGrid.xaml.cs">
       <DependentUpon>PadGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="PianoControl.xaml.cs">
       <DependentUpon>PianoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PianoToMidiOut.xaml.cs">
+      <DependentUpon>PianoToMidiOut.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpeechModule.xaml.cs">
@@ -150,11 +157,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Midi\MidiSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PadGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PianoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PianoToMidiOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,7 +187,11 @@
       <Version>5.2.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.10586.0">
+      <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

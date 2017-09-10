@@ -63,7 +63,7 @@
         </Grid.Resources>
 
         <Border Grid.Column="0" Style="{StaticResource WhiteKeyBorderStyle}">
-            <Button Name="C" Style="{StaticResource KeyButtonStyle}" />
+            <local:AudioButton Name="C" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="WhiteKey0_PointerPressPreview"/>
         </Border>
         <Border Grid.Column="3" Style="{StaticResource WhiteKeyBorderStyle}">
             <Button Name="D" Style="{StaticResource KeyButtonStyle}" />
@@ -84,11 +84,11 @@
             <Button Name="B" Style="{StaticResource KeyButtonStyle}" />
         </Border>
 
-        <Border Name="C#" Grid.Column="2" Style="{StaticResource BlackKeyBorderStyle}" />
-        <Border Name="D#" Grid.Column="5" Style="{StaticResource BlackKeyBorderStyle}" />
-        <Border Name="F#" Grid.Column="11" Style="{StaticResource BlackKeyBorderStyle}" />
-        <Border Name="G#" Grid.Column="14" Style="{StaticResource BlackKeyBorderStyle}" />
-        <Border Name="A#" Grid.Column="17" Style="{StaticResource BlackKeyBorderStyle}" />
+        <Border Name="Cs" Grid.Column="2" Style="{StaticResource BlackKeyBorderStyle}" />
+        <Border Name="Ds" Grid.Column="5" Style="{StaticResource BlackKeyBorderStyle}" />
+        <Border Name="Fs" Grid.Column="11" Style="{StaticResource BlackKeyBorderStyle}" />
+        <Border Name="Gs" Grid.Column="14" Style="{StaticResource BlackKeyBorderStyle}" />
+        <Border Name="As" Grid.Column="17" Style="{StaticResource BlackKeyBorderStyle}" />
 
     </Grid>
 </UserControl>
