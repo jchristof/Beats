@@ -22,7 +22,7 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       ClickMode="Press"
-                      Click="ButtonBase_OnClick"/>
+                      Click="ButtonBase_OnClick" Style="{StaticResource PadButtons}"/>
         <ToggleButton Tag="1"
                       Grid.Row="1"
                       HorizontalAlignment="Stretch"
