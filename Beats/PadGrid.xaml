@@ -9,7 +9,7 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid KeyDown="Grid_KeyDown">
+    <Grid KeyDown="Grid_KeyDown" Loaded="FrameworkElement_OnLoaded" SizeChanged="FrameworkElement_OnSizeChanged">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

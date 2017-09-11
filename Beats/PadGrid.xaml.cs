@@ -3,6 +3,7 @@ using System;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 
@@ -38,5 +39,27 @@ namespace Beats {
                 case VirtualKey.S: audioSystem.Play((BeatType)3); break;
             }
         }
+
+        private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e) {
+            var actualWidth = (sender as Grid).ActualWidth;
+            var actualHeight = (sender as Grid).ActualHeight;
+
+            if (actualWidth < actualHeight)
+                Height = ActualWidth;
+            else
+                Width = ActualHeight;
+
+        }
+
+        private void FrameworkElement_OnSizeChanged(object sender, SizeChangedEventArgs e) {
+            var actualWidth = (sender as Grid).ActualWidth;
+            var actualHeight = (sender as Grid).ActualHeight;
+
+            if (actualWidth < actualHeight)
+                Height = ActualWidth;
+            else
+                Width = ActualHeight;
+        }
+
     }
 }
