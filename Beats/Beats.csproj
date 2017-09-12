@@ -197,8 +197,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.10586.0">
-      <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
+    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.15063.0">
+      <Name>Microsoft General MIDI DLS for Universal Windows Apps %28Microsoft.Midi.GmDls, Version=10.0.15063.0%29</Name>
     </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

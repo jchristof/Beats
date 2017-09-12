@@ -26,7 +26,7 @@ namespace Beats {
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            int ordinal = int.Parse((sender as ToggleButton).Tag as string);
+            int ordinal = int.Parse((sender as FrameworkElement).Tag as string);
             audioSystem.Play((BeatType)ordinal);
         }
 

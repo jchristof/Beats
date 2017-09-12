@@ -18,24 +18,28 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ToggleButton Tag="0"
+        <Button Tag="0"
+                        Margin="1"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       ClickMode="Press"
-                      Click="ButtonBase_OnClick" Style="{StaticResource PadButtons}"/>
-        <ToggleButton Tag="1"
+                      Click="ButtonBase_OnClick" />
+        <Button Tag="1"
+                Margin="1"
                       Grid.Row="1"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       ClickMode="Press"
                       Click="ButtonBase_OnClick"/>
-        <ToggleButton Tag="2"
+        <Button Tag="2"
+                Margin="1"
                       Grid.Column="1"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       ClickMode="Press"
                       Click="ButtonBase_OnClick"/>
-        <ToggleButton Tag="3"
+        <Button Tag="3"
+                Margin="1"
                       Grid.Column="1" Grid.Row="1"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
