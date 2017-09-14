@@ -16,7 +16,7 @@ namespace Beats {
                 return;
 
             this.audioSystem = audioSystem;
-            IsHitTestVisible = false;
+            IsHitTestVisible = true;
         }
 
         private AudioSystem audioSystem;
