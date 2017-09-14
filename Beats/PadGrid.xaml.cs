@@ -1,29 +1,25 @@
 ﻿
-using System;
-using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 
 namespace Beats {
     public sealed partial class PadGrid {
         public PadGrid() {
             InitializeComponent();
-            InitAudioGraph();
+            IsHitTestVisible = false;
         }
 
-        private AudioSystem audioSystem = new AudioSystem();
+        public void InitGridPad(AudioSystem audioSystem) {
+            if (audioSystem == null)
+                return;
 
-        //audioGraph.Dispose();
-
-        private async void InitAudioGraph() {
-            await audioSystem.Create();
-
-            StorageFolder audioFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\audio");
-            await audioSystem.LoadAudio(audioFolder);
+            this.audioSystem = audioSystem;
+            IsHitTestVisible = false;
         }
+
+        private AudioSystem audioSystem;
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
             int ordinal = int.Parse((sender as FrameworkElement).Tag as string);
