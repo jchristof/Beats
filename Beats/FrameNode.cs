@@ -30,8 +30,15 @@ namespace Beats {
             frameInputNode.QuantumStarted += node_QuantumStarted;
         }
 
-        public void Start() {
+        private double frequency;
+
+        public void Start(double frequency) {
+            this.frequency = frequency;
             frameInputNode.Start();
+        }
+
+        public void Stop() {
+            frameInputNode.Stop();
         }
 
         private void node_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args) {
@@ -64,10 +71,10 @@ namespace Beats {
                 // Cast to float since the data we are generating is float
                 dataInFloat = (float*)dataInBytes;
 
-                float freq = 880; // choosing to generate frequency of 1kHz
+                //float freq = 880; // choosing to generate frequency of 1kHz
                 float amplitude = 0.3f;
 
-                double sampleIncrement = freq * Math.PI / sampleRate;
+                double sampleIncrement = frequency * Math.PI / sampleRate;
 
                 // Generate a 1kHz sine wave and populate the values in the memory buffer
                 for (int i = 0; i < samples; i++) {
