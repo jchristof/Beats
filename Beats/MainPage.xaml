@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:midi="using:Beats.Midi"
+    xmlns:applicationControls="using:Beats.ApplicationControls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -14,8 +15,13 @@
             <RowDefinition Height="64"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <local:PadGrid x:Name="PadGrid"></local:PadGrid>
         <local:SpeechModule Grid.Row="1"></local:SpeechModule>
         <local:PianoToMidiOut Grid.Row="2"></local:PianoToMidiOut>
+        <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Column="1"/>
     </Grid>
 </Page>

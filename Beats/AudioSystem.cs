@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
 using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Storage;
@@ -13,9 +14,9 @@ namespace Beats {
         private AudioLoader AudioLoader { get; set; }
         private FrameNode FrameNode { get; set; }
 
-        public async Task Create() {
+        public async Task Create(DeviceInformation outputDevice) {
             AudioGraphSettings settings = new AudioGraphSettings(Windows.Media.Render.AudioRenderCategory.Media);
-
+            settings.PrimaryRenderDevice = outputDevice;
             CreateAudioGraphResult result = await AudioGraph.CreateAsync(settings);
             if (result.Status != AudioGraphCreationStatus.Success) {
                 //ShowErrorMessage("AudioGraph creation error: " + result.Status.ToString());
@@ -55,9 +56,9 @@ namespace Beats {
         }
 
         public void Dispose() {
-            AudioLoader.Dispose();
-            DeviceOutput.Dispose();
-            AudioGraph.Dispose();
+            AudioLoader?.Dispose();
+            DeviceOutput?.Dispose();
+            AudioGraph?.Dispose();
         }
     }
 }
