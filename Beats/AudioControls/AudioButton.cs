@@ -1,10 +1,8 @@
-﻿
-
-using System;
+﻿using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace Beats
+namespace Beats.AudioControls
 {
     public class AudioButton : Button
     {

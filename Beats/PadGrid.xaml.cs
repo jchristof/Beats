@@ -57,5 +57,13 @@ namespace Beats {
                 Width = ActualHeight;
         }
 
+        private void Button_RightTapped(object sender, RightTappedRoutedEventArgs e) {
+            MenuFlyout myFlyout = new MenuFlyout();
+            MenuFlyoutItem firstItem = new MenuFlyoutItem { Text = "Settings" };
+            myFlyout.Items.Add(firstItem);
+
+            //the code can show the flyout in your mouse click 
+            myFlyout.ShowAt(sender as UIElement, e.GetPosition(sender as UIElement));
+        }
     }
 }

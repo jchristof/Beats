@@ -100,7 +100,7 @@
     <Compile Include="ApplicationControls\OutputSelectionControl.xaml.cs">
       <DependentUpon>OutputSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AudioButton.cs" />
+    <Compile Include="AudioControls\AudioButton.cs" />
     <Compile Include="AudioGenerator.cs" />
     <Compile Include="AudioLoader.cs" />
     <Compile Include="AudioSystem.cs" />

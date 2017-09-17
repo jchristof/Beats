@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.Devices.Midi;
+using Beats.AudioControls;
 
 namespace Beats {
     public sealed partial class PianoToMidiOut {

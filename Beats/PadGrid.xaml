@@ -23,7 +23,8 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       ClickMode="Press"
-                      Click="ButtonBase_OnClick" />
+                      Click="ButtonBase_OnClick"
+                    RightTapped="Button_RightTapped"/>
         <Button Tag="1"
                 Margin="1"
                       Grid.Row="1"

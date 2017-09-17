@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:audioControls="using:Beats.AudioControls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -80,41 +81,41 @@
 <!--            </core:EventTriggerBehavior>-->
 <!--        </interactivity:Interaction.Behaviors>-->
         <Border Grid.Column="0" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="C" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="C" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="3" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="D" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="D" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="6" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="E" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="E" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="9" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="F" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="F" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="12" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="G" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="G" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="15" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="A" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="A" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="18" Style="{StaticResource WhiteKeyBorderStyle}">
-            <local:AudioButton x:Name="B" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="B" Style="{StaticResource KeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
 
         <Border Grid.Column="2" Style="{StaticResource BlackKeyBorderStyle}">
-            <local:AudioButton x:Name="Cs" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="Cs" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="5" Style="{StaticResource BlackKeyBorderStyle}">
-            <local:AudioButton x:Name="Ds" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="Ds" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="11" Style="{StaticResource BlackKeyBorderStyle}">
-            <local:AudioButton x:Name="Fs" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="Fs" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="14" Style="{StaticResource BlackKeyBorderStyle}">
-            <local:AudioButton x:Name="Gs" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="Gs" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
         <Border Grid.Column="17" Style="{StaticResource BlackKeyBorderStyle}">
-            <local:AudioButton x:Name="As" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
+            <audioControls:AudioButton x:Name="As" Style="{StaticResource BlackKeyButtonStyle}" PointerPressPreview="PointerPressPreview" PointerReleasedPreview="PointerReleasedPreview"/>
         </Border>
 
     </Grid>
