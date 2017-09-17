@@ -101,6 +101,9 @@
       <DependentUpon>OutputSelectionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="AudioControls\AudioButton.cs" />
+    <Compile Include="AudioControls\RangeSlider.xaml.cs">
+      <DependentUpon>RangeSlider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AudioGenerator.cs" />
     <Compile Include="AudioLoader.cs" />
     <Compile Include="AudioSystem.cs" />
@@ -164,6 +167,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="ApplicationControls\OutputSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AudioControls\PlaybackModifierControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AudioControls\RangeSlider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
