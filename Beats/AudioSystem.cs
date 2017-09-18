@@ -36,14 +36,9 @@ namespace Beats {
         }
 
         public async Task LoadAudio(StorageFolder storageFolder) {
-            AudioLoader = new AudioLoader(AudioGraph, storageFolder);
+            AudioLoader = new AudioLoader(AudioGraph, DeviceOutput, storageFolder);
 
             await AudioLoader.LoadAudio();
-
-            foreach (KeyValuePair<BeatType, AudioFileInputNode> audioFileInputNode in AudioLoader.BeatMap) {
-                audioFileInputNode.Value.AddOutgoingConnection(DeviceOutput);
-                audioFileInputNode.Value.Stop();
-            }
 
             FrameNode = new FrameNode();
             FrameNode.Create(AudioGraph, DeviceOutput);
@@ -51,8 +46,7 @@ namespace Beats {
         }
 
         public void Play(BeatType beatType) {
-            AudioLoader.BeatMap[beatType].Reset();
-            AudioLoader.BeatMap[beatType].Start();
+            AudioLoader.Play(beatType);
         }
 
         public void Dispose() {

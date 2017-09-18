@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:midi="using:Beats.Midi"
     xmlns:applicationControls="using:Beats.ApplicationControls"
+    xmlns:audioControls="using:Beats.AudioControls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -23,5 +24,6 @@
         <local:SpeechModule Grid.Row="1"></local:SpeechModule>
         <local:PianoToMidiOut Grid.Row="2"></local:PianoToMidiOut>
         <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Column="1"/>
+        <audioControls:AudioNodePropertyModifierControl Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Page>

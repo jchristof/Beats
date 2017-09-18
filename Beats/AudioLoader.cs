@@ -3,37 +3,50 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Media.Audio;
 using Windows.Storage;
+using Beats.ViewModels;
 
 namespace Beats {
-    public class AudioLoader : IDisposable{
-        public Dictionary<BeatType, AudioFileInputNode> BeatMap = new Dictionary<BeatType, AudioFileInputNode>();
+    public class AudioLoader : IDisposable {
+        private readonly Dictionary<BeatType, AudioFileInputNodeViewModel> BeatMap = new Dictionary<BeatType, AudioFileInputNodeViewModel>();
         private readonly AudioGraph audioGraph;
         private readonly StorageFolder audioFolder;
+        private readonly AudioDeviceOutputNode deviceOutput;
 
-        public AudioLoader(AudioGraph audioGraph, StorageFolder audioFolder) {
+        public AudioLoader(AudioGraph audioGraph, AudioDeviceOutputNode deviceOutput, StorageFolder audioFolder) {
             this.audioGraph = audioGraph ?? throw new ArgumentNullException(nameof(audioGraph));
+            this.deviceOutput = deviceOutput ?? throw new ArgumentException(nameof(deviceOutput));
             this.audioFolder = audioFolder ?? throw new ArgumentNullException(nameof(audioFolder));
         }
 
         public async Task LoadAudio() {
-            BeatMap.Add(BeatType.Snare, await LoadAudio("snare194.wav"));
-            BeatMap.Add(BeatType.Kick, await LoadAudio("KICK 39.WAV"));
-            BeatMap.Add(BeatType.Crash, await LoadAudio("crash-hi.wav"));
-            BeatMap.Add(BeatType.Hat, await LoadAudio("Closed Hat 3.wav"));
+            AudioFileInputNodeViewModel fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioGraph, deviceOutput, audioFolder, "snare194.wav");
+
+            BeatMap.Add(BeatType.Snare, fileNode);
+
+            fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioGraph, deviceOutput, audioFolder, "KICK 39.WAV");
+
+            BeatMap.Add(BeatType.Kick, fileNode);
+
+            fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioGraph, deviceOutput, audioFolder, "crash-hi.wav");
+
+            BeatMap.Add(BeatType.Crash, fileNode);
+
+            fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioGraph, deviceOutput, audioFolder, "Closed Hat 3.wav");
+
+            BeatMap.Add(BeatType.Hat, fileNode);
         }
 
-        private async Task<AudioFileInputNode> LoadAudio(string filename) {
-            StorageFile file = await audioFolder.GetFileAsync(filename);
-
-            CreateAudioFileInputNodeResult fileInputResult = await audioGraph.CreateFileInputNodeAsync(file);
-            if (AudioFileNodeCreationStatus.Success == fileInputResult.Status)
-                return fileInputResult.FileInputNode;
-            
-            throw new InvalidOperationException($"Unable to load audio file {filename}");
+        public void Play(BeatType beatType) {
+            BeatMap[beatType].Play();
         }
+
 
         public void Dispose() {
-            foreach (KeyValuePair<BeatType, AudioFileInputNode> audioFileInputNode in BeatMap) {
+            foreach (KeyValuePair<BeatType, AudioFileInputNodeViewModel> audioFileInputNode in BeatMap) {
                 audioFileInputNode.Value.Dispose();
             }
         }
