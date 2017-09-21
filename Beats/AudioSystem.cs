@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
 using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Storage;
+using Windows.UI.Core;
 
 namespace Beats {
     public class AudioSystem : IDisposable{
@@ -18,16 +21,26 @@ namespace Beats {
             AudioGraphSettings settings = new AudioGraphSettings(Windows.Media.Render.AudioRenderCategory.Media);
             settings.PrimaryRenderDevice = outputDevice;
             CreateAudioGraphResult result = await AudioGraph.CreateAsync(settings);
+
             if (result.Status != AudioGraphCreationStatus.Success) {
-                //ShowErrorMessage("AudioGraph creation error: " + result.Status.ToString());
+                Debug.WriteLine("AudioGraph creation error: " + result.Status);
+                return;
             }
 
             AudioGraph = result.Graph;
+            AudioGraph.UnrecoverableErrorOccurred += async (sender, args) => {
+
+                await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.Normal,
+                    () => {
+                        //on UI thread
+                    });
+                Debug.WriteLine(args.Error);
+            };
 
             CreateAudioDeviceOutputNodeResult deviceOutputNodeResult = await AudioGraph.CreateDeviceOutputNodeAsync();
             if (deviceOutputNodeResult.Status != AudioDeviceNodeCreationStatus.Success) {
-                // Cannot create device output node
-
+                Debug.WriteLine("Output device creation error: " + result.Status);
                 return;
             }
 
