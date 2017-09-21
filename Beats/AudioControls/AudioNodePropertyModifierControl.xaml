@@ -5,6 +5,7 @@
     xmlns:local="using:Beats.AudioControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -21,11 +22,11 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Range"></TextBlock>
-            <local:RangeSlider 
-                Grid.Row="1"
-                RangeMin="{Binding StartPosition, Mode=TwoWay}"
-                RangeMax="{Binding EndPosition, Mode=TwoWay}"
-                Maximum="{Binding Duration.TotalSeconds}"/>
+            <controls:RangeSelector Grid.Row="1"
+                                    RangeMin="{Binding StartPosition, Mode=TwoWay}"
+                                    RangeMax="{Binding EndPosition, Mode=TwoWay}"
+                                    Maximum="{Binding Duration.TotalSeconds}"/>
+
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
