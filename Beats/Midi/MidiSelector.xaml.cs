@@ -31,7 +31,7 @@ namespace Beats.Midi {
         private async void midiInPortListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var deviceInformationCollection = inputDeviceWatcher.DeviceInformationCollection;
 
-            DeviceInformation devInfo = deviceInformationCollection?[midiOutPortListBox.SelectedIndex];
+            DeviceInformation devInfo = deviceInformationCollection?[midiInPortListBox.SelectedIndex];
 
             if (devInfo == null) {
                 return;
