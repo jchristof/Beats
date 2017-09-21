@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 using Windows.Devices.Enumeration;
 using Windows.Devices.Midi;
 using Windows.UI.Xaml;
@@ -30,6 +31,9 @@ namespace Beats.Midi {
         private MidiInPort midiInPort;
         private async void midiInPortListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var deviceInformationCollection = inputDeviceWatcher.DeviceInformationCollection;
+
+            if (!deviceInformationCollection.Any())
+                return;
 
             DeviceInformation devInfo = deviceInformationCollection?[midiInPortListBox.SelectedIndex];
 

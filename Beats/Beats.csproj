@@ -111,7 +111,7 @@
     <Compile Include="Events\OutputDeviceChangedEvent.cs" />
     <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="FrameNode.cs" />
-    <Compile Include="KeyboardToAudioFrameOut.xaml.cs">
+    <Compile Include="AudioControls\KeyboardToAudioFrameOut.xaml.cs">
       <DependentUpon>KeyboardToAudioFrameOut.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
@@ -121,18 +121,18 @@
     <Compile Include="Midi\MidiSelector.xaml.cs">
       <DependentUpon>MidiSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PadGrid.xaml.cs">
+    <Compile Include="AudioControls\PadGrid.xaml.cs">
       <DependentUpon>PadGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PianoControl.xaml.cs">
+    <Compile Include="AudioControls\PianoControl.xaml.cs">
       <DependentUpon>PianoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PianoToMidiOut.xaml.cs">
+    <Compile Include="AudioControls\PianoToMidiOut.xaml.cs">
       <DependentUpon>PianoToMidiOut.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpeechModule.xaml.cs">
+    <Compile Include="AudioControls\SpeechModule.xaml.cs">
       <DependentUpon>SpeechModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpeechNode.cs" />
@@ -175,7 +175,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="KeyboardToAudioFrameOut.xaml">
+    <Page Include="AudioControls\KeyboardToAudioFrameOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,15 +187,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PadGrid.xaml">
+    <Page Include="AudioControls\PadGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PianoControl.xaml">
+    <Page Include="AudioControls\PianoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PianoToMidiOut.xaml">
+    <Page Include="AudioControls\PianoToMidiOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,7 +204,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="SpeechModule.xaml">
+    <Page Include="AudioControls\SpeechModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

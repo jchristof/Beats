@@ -2,10 +2,8 @@
     x:Class="Beats.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Beats"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:midi="using:Beats.Midi"
     xmlns:applicationControls="using:Beats.ApplicationControls"
     xmlns:audioControls="using:Beats.AudioControls"
     mc:Ignorable="d">
@@ -20,10 +18,17 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <local:PadGrid x:Name="PadGrid"></local:PadGrid>
-        <local:SpeechModule Grid.Row="1"></local:SpeechModule>
-        <local:PianoToMidiOut Grid.Row="2"></local:PianoToMidiOut>
+        <audioControls:PadGrid x:Name="PadGrid"></audioControls:PadGrid>
+        <audioControls:SpeechModule Grid.Row="1"></audioControls:SpeechModule>
+        <audioControls:PianoToMidiOut Grid.Row="2"></audioControls:PianoToMidiOut>
         <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Column="1"/>
         <audioControls:AudioNodePropertyModifierControl Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Page>
+
+
+
+
+
+
+

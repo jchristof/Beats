@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Beats.Midi;
+using System;
 using System.Collections.Generic;
 using Windows.Devices.Midi;
-using Beats.AudioControls;
 
-namespace Beats {
+namespace Beats.AudioControls {
     public sealed partial class PianoToMidiOut {
 
         public PianoToMidiOut() {

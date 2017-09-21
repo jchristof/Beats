@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Beats
+namespace Beats.AudioControls
 {
     public sealed partial class PianoControl
     {

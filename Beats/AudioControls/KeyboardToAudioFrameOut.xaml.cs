@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
 
-namespace Beats
+namespace Beats.AudioControls
 {
     public sealed partial class KeyboardToAudioFrameOut : UserControl
     {

@@ -1,8 +1,7 @@
-﻿
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Beats.Extensions;
 
-namespace Beats {
+namespace Beats.AudioControls {
     public sealed partial class SpeechModule {
         public SpeechModule() {
             InitializeComponent();
