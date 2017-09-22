@@ -60,10 +60,16 @@ namespace Beats.AudioControls {
         private void Button_RightTapped(object sender, RightTappedRoutedEventArgs e) {
             MenuFlyout myFlyout = new MenuFlyout();
             MenuFlyoutItem firstItem = new MenuFlyoutItem { Text = "Settings" };
+            firstItem.Tag = (sender as Button).Tag;
+            firstItem.Click += FirstItem_Click;
             myFlyout.Items.Add(firstItem);
 
             //the code can show the flyout in your mouse click 
             myFlyout.ShowAt(sender as UIElement, e.GetPosition(sender as UIElement));
+        }
+
+        private void FirstItem_Click(object sender, RoutedEventArgs e) {
+  
         }
     }
 }

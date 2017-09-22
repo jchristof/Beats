@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
-using Windows.Media;
 using Windows.Media.Audio;
 using Windows.Storage;
 using Windows.UI.Core;

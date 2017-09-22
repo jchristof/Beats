@@ -11,15 +11,24 @@
     d:DesignWidth="400">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Filename}"/>
+            <Button Grid.Column="1" Content="..." HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Range"></TextBlock>
             <controls:RangeSelector Grid.Row="1"
@@ -28,18 +37,18 @@
                                     Maximum="{Binding Duration.TotalSeconds}"/>
 
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Speed"></TextBlock>
             <Slider Grid.Row="1" Value="{Binding PlaybackSpeed, Mode=TwoWay}"></Slider>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Volume"></TextBlock>
             <Slider Grid.Row="1" 
@@ -47,7 +56,7 @@
                     Minimum="0"
                     Maximum="100"/>
         </Grid>
-        <StackPanel Grid.Row="3">
+        <StackPanel Grid.Row="4">
             <TextBlock Text="Duration"></TextBlock>
             <TextBlock Text="{Binding Duration}"></TextBlock>
         </StackPanel>
