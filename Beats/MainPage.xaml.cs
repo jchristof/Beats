@@ -28,7 +28,7 @@ namespace Beats {
 
             audioSystem = new AudioSystem();
             await InitAudioGraph(e.OutputDevice);
-            PadGrid.InitGridPad(audioSystem);
+            await PadGrid.InitGridPad(audioSystem);
         }
 
     }

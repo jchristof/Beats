@@ -105,7 +105,6 @@
       <DependentUpon>AudioNodePropertyModifierControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="AudioGenerator.cs" />
-    <Compile Include="AudioLoader.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="BeatType.cs" />
     <Compile Include="Events\OutputDeviceChangedEvent.cs" />

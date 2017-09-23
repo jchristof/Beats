@@ -1,8 +1,13 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Beats.ViewModels;
 
 namespace Beats.AudioControls {
     public sealed partial class PadGrid {
@@ -11,28 +16,60 @@ namespace Beats.AudioControls {
             IsHitTestVisible = false;
         }
 
-        public void InitGridPad(AudioSystem audioSystem) {
+        public async Task InitGridPad(AudioSystem audioSystem) {
             if (audioSystem == null)
                 return;
 
             this.audioSystem = audioSystem;
+            await LoadDefaultAudio();
             IsHitTestVisible = true;
         }
+
+        public async Task LoadDefaultAudio() {
+            StorageFolder audioFolder =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\audio");
+
+            AudioFileInputNodeViewModel fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "snare194.wav");
+
+            BeatMap.Add(0, fileNode);
+
+            fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "KICK 39.WAV");
+
+            BeatMap.Add(1, fileNode);
+
+            fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "crash-hi.wav");
+
+            BeatMap.Add(2, fileNode);
+
+            fileNode = new AudioFileInputNodeViewModel();
+            await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "Closed Hat 3.wav");
+
+            BeatMap.Add(3, fileNode);
+        }
+
+        private readonly Dictionary<int, AudioFileInputNodeViewModel> BeatMap = new Dictionary<int, AudioFileInputNodeViewModel>();
 
         private AudioSystem audioSystem;
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
             int ordinal = int.Parse((sender as FrameworkElement).Tag as string);
-            audioSystem.Play((BeatType)ordinal);
+            Play(ordinal);
+        }
+
+        public void Play(int padNumber) {
+            BeatMap[padNumber].Play();
         }
 
         private void Grid_KeyDown(object sender, KeyRoutedEventArgs e) {
 
             switch (e.Key) {
-                case VirtualKey.Q: audioSystem.Play((BeatType)0); break;
-                case VirtualKey.A: audioSystem.Play((BeatType)1); break;
-                case VirtualKey.W: audioSystem.Play((BeatType)2); break;
-                case VirtualKey.S: audioSystem.Play((BeatType)3); break;
+                case VirtualKey.Q: BeatMap[0].Play(); ; break;
+                case VirtualKey.A: BeatMap[1].Play(); ; break;
+                case VirtualKey.W: BeatMap[2].Play(); ; break;
+                case VirtualKey.S: BeatMap[3].Play(); ; break;
             }
         }
 
@@ -69,7 +106,7 @@ namespace Beats.AudioControls {
         }
 
         private void FirstItem_Click(object sender, RoutedEventArgs e) {
-  
+
         }
     }
 }

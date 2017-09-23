@@ -10,9 +10,8 @@ using Windows.UI.Core;
 namespace Beats {
     public class AudioSystem : IDisposable{
 
-        private AudioGraph AudioGraph { get; set; }
-        private AudioDeviceOutputNode DeviceOutput { get; set; }
-        private AudioLoader AudioLoader { get; set; }
+        public AudioGraph AudioGraph { get; set; }
+        public AudioDeviceOutputNode DeviceOutput { get; set; }
         private FrameNode FrameNode { get; set; }
 
         public async Task Create(DeviceInformation outputDevice) {
@@ -47,21 +46,12 @@ namespace Beats {
         }
 
         public async Task LoadAudio(StorageFolder storageFolder) {
-            AudioLoader = new AudioLoader(AudioGraph, DeviceOutput, storageFolder);
-
-            await AudioLoader.LoadAudio();
-
             FrameNode = new FrameNode();
             FrameNode.Create(AudioGraph, DeviceOutput);
             //FrameNode.Start(880);
         }
 
-        public void Play(BeatType beatType) {
-            AudioLoader.Play(beatType);
-        }
-
         public void Dispose() {
-            AudioLoader?.Dispose();
             DeviceOutput?.Dispose();
             AudioGraph?.Dispose();
         }
