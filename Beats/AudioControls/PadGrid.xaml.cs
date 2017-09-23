@@ -10,12 +10,17 @@ using Windows.UI.Xaml.Input;
 using Beats.ViewModels;
 
 namespace Beats.AudioControls {
-    public sealed partial class PadGrid {
+    public sealed partial class PadGrid : IDisposable {
         public PadGrid() {
             InitializeComponent();
             IsHitTestVisible = false;
         }
 
+        private readonly Dictionary<int, AudioFileInputNodeViewModel> AudioMap = new Dictionary<int, AudioFileInputNodeViewModel>();
+
+        private AudioSystem audioSystem;
+
+        //Initialize the pad and load default audio
         public async Task InitGridPad(AudioSystem audioSystem) {
             if (audioSystem == null)
                 return;
@@ -25,6 +30,7 @@ namespace Beats.AudioControls {
             IsHitTestVisible = true;
         }
 
+        //load default audio from the intalled proejct 
         public async Task LoadDefaultAudio() {
             StorageFolder audioFolder =
                 await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\audio");
@@ -32,27 +38,23 @@ namespace Beats.AudioControls {
             AudioFileInputNodeViewModel fileNode = new AudioFileInputNodeViewModel();
             await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "snare194.wav");
 
-            BeatMap.Add(0, fileNode);
+            AudioMap.Add(0, fileNode);
 
             fileNode = new AudioFileInputNodeViewModel();
             await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "KICK 39.WAV");
 
-            BeatMap.Add(1, fileNode);
+            AudioMap.Add(1, fileNode);
 
             fileNode = new AudioFileInputNodeViewModel();
             await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "crash-hi.wav");
 
-            BeatMap.Add(2, fileNode);
+            AudioMap.Add(2, fileNode);
 
             fileNode = new AudioFileInputNodeViewModel();
             await fileNode.LoadAudio(audioSystem.AudioGraph, audioSystem.DeviceOutput, audioFolder, "Closed Hat 3.wav");
 
-            BeatMap.Add(3, fileNode);
+            AudioMap.Add(3, fileNode);
         }
-
-        private readonly Dictionary<int, AudioFileInputNodeViewModel> BeatMap = new Dictionary<int, AudioFileInputNodeViewModel>();
-
-        private AudioSystem audioSystem;
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
             int ordinal = int.Parse((sender as FrameworkElement).Tag as string);
@@ -60,16 +62,16 @@ namespace Beats.AudioControls {
         }
 
         public void Play(int padNumber) {
-            BeatMap[padNumber].Play();
+            AudioMap[padNumber].Play();
         }
 
         private void Grid_KeyDown(object sender, KeyRoutedEventArgs e) {
 
             switch (e.Key) {
-                case VirtualKey.Q: BeatMap[0].Play(); ; break;
-                case VirtualKey.A: BeatMap[1].Play(); ; break;
-                case VirtualKey.W: BeatMap[2].Play(); ; break;
-                case VirtualKey.S: BeatMap[3].Play(); ; break;
+                case VirtualKey.Q: AudioMap[0].Play(); ; break;
+                case VirtualKey.A: AudioMap[1].Play(); ; break;
+                case VirtualKey.W: AudioMap[2].Play(); ; break;
+                case VirtualKey.S: AudioMap[3].Play(); ; break;
             }
         }
 
@@ -105,8 +107,24 @@ namespace Beats.AudioControls {
             myFlyout.ShowAt(sender as UIElement, e.GetPosition(sender as UIElement));
         }
 
+        public event EventHandler<AudioFileInputNodeViewModel> AudioFileSelected = delegate { };
         private void FirstItem_Click(object sender, RoutedEventArgs e) {
-
+            int ordinal = int.Parse((sender as FrameworkElement).Tag as string);
+            AudioFileSelected(sender, AudioMap[ordinal]);
         }
+
+        private void ReleaseAudio() {
+            if (AudioMap == null)
+                return;
+
+            foreach (KeyValuePair<int, AudioFileInputNodeViewModel> audioFileInputNodeViewModel in AudioMap) {
+                audioFileInputNodeViewModel.Value.Dispose();
+            }
+        }
+
+        public void Dispose() {
+            ReleaseAudio();
+        }
+
     }
 }

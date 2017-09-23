@@ -107,6 +107,7 @@
     <Compile Include="AudioGenerator.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="BeatType.cs" />
+    <Compile Include="Converters\TimeSpanToMillisecondsConverter.cs" />
     <Compile Include="Events\OutputDeviceChangedEvent.cs" />
     <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="FrameNode.cs" />

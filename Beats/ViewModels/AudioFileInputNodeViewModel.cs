@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.Media.Audio;
@@ -26,10 +27,42 @@ namespace Beats.ViewModels {
             AudioFileInputNode.Reset();
 
             Duration = AudioFileInputNode.Duration;
+            StartPosition = TimeSpan.Zero;
+            EndPosition = AudioFileInputNode.Duration;
+            PlaybackSpeed = AudioFileInputNode.PlaybackSpeedFactor * 100;
+            Volume = AudioFileInputNode.OutgoingGain * 100;
+            Filename = Path.GetFileName(filename);
+        }
+
+//        public async Task LoadAudio(StorageFile file) {
+//                        CreateAudioFileInputNodeResult fileInputResult = await audioGraph.CreateFileInputNodeAsync(file);
+//            if (AudioFileNodeCreationStatus.Success != fileInputResult.Status)
+//                return;
+//
+//            AudioFileInputNode = fileInputResult.FileInputNode;
+//            AudioFileInputNode.AddOutgoingConnection(outputNode);
+//            AudioFileInputNode.Stop();
+//
+//            AudioFileInputNode.Reset();
+//
+//            Duration = AudioFileInputNode.Duration;
+//            StartPosition = TimeSpan.Zero;
+//            EndPosition = AudioFileInputNode.Duration;
+//            PlaybackSpeed = AudioFileInputNode.PlaybackSpeedFactor * 100;
+//            Volume = AudioFileInputNode.OutgoingGain * 100;
+//            Filename = Path.GetFileName(filename);
+//        }
+
+        public void Reset() {
+            StartPosition = TimeSpan.Zero;
+            EndPosition = AudioFileInputNode.Duration;
+            PlaybackSpeed = 100;
+            Volume = 100;
         }
 
         public void Dispose() {
-            AudioFileInputNode.Dispose();
+            AudioFileInputNode?.Stop();
+            AudioFileInputNode?.Dispose();
             AudioFileInputNode = null;
         }
 
@@ -38,32 +71,45 @@ namespace Beats.ViewModels {
                 return;
 
             AudioFileInputNode.Reset();
-            //AudioFileInputNode.StartTime = StartTime;
-            //AudioFileInputNode.EndTime = EndTime;
+            AudioFileInputNode.StartTime = startPosition;
+            AudioFileInputNode.EndTime = endPosition;
             AudioFileInputNode.Start();
         }
 
-        private TimeSpan startTime;
 
-        public TimeSpan StartTime {
-            get => startTime;
+        private string filename;
+
+        public string Filename {
+            get => filename;
             set {
-                if (startTime.Equals(value))
+                if (value == filename)
                     return;
-                startTime = value;
+                filename = value;
                 RaisePropertyChanged();
             }
         }
 
-        private TimeSpan endTime;
+        private TimeSpan startPosition;
 
-        public TimeSpan EndTime {
-            get => endTime;
+        public TimeSpan StartPosition {
+            get => startPosition;
             set {
-                if (startTime.Equals(value))
+                if (startPosition.Equals(value))
+                    return;
+                startPosition = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private TimeSpan endPosition;
+
+        public TimeSpan EndPosition {
+            get => endPosition;
+            set {
+                if (endPosition.Equals(value))
                     return;
 
-                startTime = value;
+                endPosition = value;
                 RaisePropertyChanged();
             }
         }

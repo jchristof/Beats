@@ -10,19 +10,19 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="64"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <audioControls:PadGrid x:Name="PadGrid"></audioControls:PadGrid>
-        <audioControls:SpeechModule Grid.Row="1"></audioControls:SpeechModule>
-        <audioControls:PianoToMidiOut Grid.Row="2"></audioControls:PianoToMidiOut>
-        <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Column="1"/>
-        <audioControls:AudioNodePropertyModifierControl Grid.Row="2" Grid.Column="1"/>
+        <audioControls:PadGrid x:Name="PadGrid" AudioFileSelected="PadGrid_OnAudioFileSelected"/>
+        <audioControls:SpeechModule Grid.Row="1" Grid.Column="0" />
+        <audioControls:PianoToMidiOut Grid.Row="2" Grid.Column="0" />
+        <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Row="0" Grid.Column="1"/>
+        <audioControls:AudioNodePropertyModifierControl x:Name="AudioNodePropertyModifierControl" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Page>
 

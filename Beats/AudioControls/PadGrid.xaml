@@ -19,32 +19,35 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Tag="0"
-                        Margin="1"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      ClickMode="Press"
-                      Click="ButtonBase_OnClick"
-                    RightTapped="Button_RightTapped"/>
+            Margin="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClickMode="Press"
+            Click="ButtonBase_OnClick"
+            RightTapped="Button_RightTapped"/>
         <Button Tag="1"
-                Margin="1"
-                      Grid.Row="1"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      ClickMode="Press"
-                      Click="ButtonBase_OnClick"/>
+            Margin="1"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClickMode="Press"
+            Click="ButtonBase_OnClick"
+            RightTapped="Button_RightTapped"/>
         <Button Tag="2"
-                Margin="1"
-                      Grid.Column="1"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      ClickMode="Press"
-                      Click="ButtonBase_OnClick"/>
+            Margin="1"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClickMode="Press"
+            Click="ButtonBase_OnClick"
+            RightTapped="Button_RightTapped"/>
         <Button Tag="3"
-                Margin="1"
-                      Grid.Column="1" Grid.Row="1"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      ClickMode="Press"
-                      Click="ButtonBase_OnClick"/>
+            Margin="1"
+            Grid.Column="1" Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClickMode="Press"
+            Click="ButtonBase_OnClick"
+            RightTapped="Button_RightTapped"/>
     </Grid>
 </UserControl>

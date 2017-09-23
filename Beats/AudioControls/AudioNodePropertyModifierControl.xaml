@@ -2,13 +2,18 @@
     x:Class="Beats.AudioControls.AudioNodePropertyModifierControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Beats.AudioControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Beats.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    RightTapped="AudioNodePropertyModifierControl_OnRightTapped"
+    >
+    <UserControl.Resources>
+        <converters:TimeSpanToMillisecondsConverter x:Key="TimeSpanToMillisecondsConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -23,7 +28,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Filename}"/>
-            <Button Grid.Column="1" Content="..." HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button Grid.Column="1" Content="..." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PickAudioFile"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -32,9 +37,9 @@
             </Grid.RowDefinitions>
             <TextBlock Text="Range"></TextBlock>
             <controls:RangeSelector Grid.Row="1"
-                                    RangeMin="{Binding StartPosition, Mode=TwoWay}"
-                                    RangeMax="{Binding EndPosition, Mode=TwoWay}"
-                                    Maximum="{Binding Duration.TotalSeconds}"/>
+                                    RangeMin="{Binding StartPosition, Mode=TwoWay, Converter={StaticResource TimeSpanToMillisecondsConverter}}"
+                                    RangeMax="{Binding EndPosition, Mode=TwoWay, Converter={StaticResource TimeSpanToMillisecondsConverter}}"
+                                    Maximum="{Binding Duration, Converter={StaticResource TimeSpanToMillisecondsConverter}}"/>
 
         </Grid>
         <Grid Grid.Row="2">

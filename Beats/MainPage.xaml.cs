@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Storage;
 using Beats.Events;
+using Beats.ViewModels;
 
 namespace Beats {
     /// <summary>
@@ -29,6 +30,10 @@ namespace Beats {
             audioSystem = new AudioSystem();
             await InitAudioGraph(e.OutputDevice);
             await PadGrid.InitGridPad(audioSystem);
+        }
+
+        private void PadGrid_OnAudioFileSelected(object sender, AudioFileInputNodeViewModel e) {
+            AudioNodePropertyModifierControl.DataContext = e;
         }
 
     }
