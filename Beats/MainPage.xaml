@@ -6,7 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:applicationControls="using:Beats.ApplicationControls"
     xmlns:audioControls="using:Beats.AudioControls"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="MainPage_OnLoaded"
+    >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -21,8 +23,7 @@
         <audioControls:PadGrid x:Name="PadGrid" AudioFileSelected="PadGrid_OnAudioFileSelected"/>
         <audioControls:SpeechModule Grid.Row="1" Grid.Column="0" />
         <audioControls:PianoToMidiOut Grid.Row="2" Grid.Column="0" />
-        <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Row="0" Grid.Column="1"/>
-        <audioControls:AudioNodePropertyModifierControl x:Name="AudioNodePropertyModifierControl" Grid.Row="2" Grid.Column="1" PickNewAudioFile="AudioNodePropertyModifierControl_OnPickNewAudioFile"/>
+        <audioControls:AudioNodePropertyModifierControl x:Name="AudioNodePropertyModifierControl" Grid.Row="0" Grid.Column="1" PickNewAudioFile="AudioNodePropertyModifierControl_OnPickNewAudioFile"/>
     </Grid>
 </Page>
 

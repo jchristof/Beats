@@ -108,6 +108,9 @@
     <Compile Include="AudioSystem.cs" />
     <Compile Include="BeatType.cs" />
     <Compile Include="Converters\TimeSpanToMillisecondsConverter.cs" />
+    <Compile Include="Dialogs\SelectOuputDeviceDialog.xaml.cs">
+      <DependentUpon>SelectOuputDeviceDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Events\OutputDeviceChangedEvent.cs" />
     <Compile Include="Extensions\MediaElementExtensions.cs" />
     <Compile Include="FrameNode.cs" />
@@ -176,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AudioControls\KeyboardToAudioFrameOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\SelectOuputDeviceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

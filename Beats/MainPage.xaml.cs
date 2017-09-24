@@ -3,6 +3,8 @@ using System;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Storage;
+using Windows.UI.Xaml;
+using Beats.Dialogs;
 using Beats.Events;
 using Beats.ViewModels;
 
@@ -24,14 +26,6 @@ namespace Beats {
             await audioSystem.LoadAudio(audioFolder);
         }
 
-        private async void OutputSelectionControl_OnOutputDeviceSelectionChanged(object sender, OutputDeviceChangedEvent e) {
-            audioSystem?.Dispose();
-
-            audioSystem = new AudioSystem();
-            await InitAudioGraph(e.OutputDevice);
-            await PadGrid.InitGridPad(audioSystem);
-        }
-
         private void PadGrid_OnAudioFileSelected(object sender, AudioFileInputNodeViewModel e) {
             AudioNodePropertyModifierControl.DataContext = e;
         }
@@ -50,6 +44,14 @@ namespace Beats {
 
 
             await PadGrid.LoadAudio((sender as AudioFileInputNodeViewModel).Id, file);
+        }
+
+        private async void MainPage_OnLoaded(object sender, RoutedEventArgs e) {
+            var dialog = new SelectOuputDeviceDialog();
+            await dialog.ShowAsync();
+
+            await InitAudioGraph(dialog.Result);
+            await PadGrid.InitGridPad(audioSystem);
         }
 
     }
