@@ -24,6 +24,14 @@
         <audioControls:SpeechModule Grid.Row="1" Grid.Column="0" />
         <audioControls:PianoToMidiOut Grid.Row="2" Grid.Column="0" />
         <audioControls:AudioNodePropertyModifierControl x:Name="AudioNodePropertyModifierControl" Grid.Row="0" Grid.Column="1" PickNewAudioFile="AudioNodePropertyModifierControl_OnPickNewAudioFile"/>
+        <audioControls:Dial x:Name="Dial" Grid.Row="2" Grid.Column="1" Height="300" Width="300" Minimum="90.0" Maximum="270.0">
+            <audioControls:Dial.Knob>
+                <Grid>
+                    <Ellipse Fill="CadetBlue"/>
+                    <Rectangle Height="40" Width="150" Margin="0,0,150,0" RadiusX="20" RadiusY="20" Fill="Black"/>
+                </Grid>
+            </audioControls:Dial.Knob>
+        </audioControls:Dial>
     </Grid>
 </Page>
 

@@ -37,10 +37,9 @@
             </Grid.RowDefinitions>
             <TextBlock Text="Range"></TextBlock>
             <controls:RangeSelector Grid.Row="1"
-                                    Maximum="{Binding Duration, Converter={StaticResource TimeSpanToMillisecondsConverter}}"
                                     RangeMin="{Binding StartPosition, Mode=TwoWay, Converter={StaticResource TimeSpanToMillisecondsConverter}}"
                                     RangeMax="{Binding EndPosition, Mode=TwoWay, Converter={StaticResource TimeSpanToMillisecondsConverter}}"
-                                    />
+                                    Maximum="{Binding Duration, Converter={StaticResource TimeSpanToMillisecondsConverter}}"/>
 
         </Grid>
         <Grid Grid.Row="2">

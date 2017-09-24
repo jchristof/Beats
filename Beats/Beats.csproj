@@ -104,6 +104,7 @@
     <Compile Include="AudioControls\AudioNodePropertyModifierControl.xaml.cs">
       <DependentUpon>AudioNodePropertyModifierControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AudioControls\Dial.cs" />
     <Compile Include="AudioGenerator.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="BeatType.cs" />
@@ -218,6 +219,10 @@
     <Page Include="TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
