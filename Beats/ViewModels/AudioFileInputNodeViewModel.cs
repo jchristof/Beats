@@ -3,77 +3,50 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Windows.Media.Audio;
-using Windows.Storage;
 using Beats.Annotations;
 
 namespace Beats.ViewModels {
     public class AudioFileInputNodeViewModel : INotifyPropertyChanged, IDisposable {
 
-        public AudioFileInputNode AudioFileInputNode { get; private set; }
+        public AudioFileInputNodeViewModel(AudioFileInputNode audioFileInputNode, object id) {
+            this.audioFileInputNode = audioFileInputNode;
 
-        public async Task LoadAudio(AudioGraph audioGraph, AudioDeviceOutputNode outputNode, StorageFolder audioFolder, string filename) {
-            StorageFile file = await audioFolder.GetFileAsync(filename);
-
-            CreateAudioFileInputNodeResult fileInputResult = await audioGraph.CreateFileInputNodeAsync(file);
-            if (AudioFileNodeCreationStatus.Success != fileInputResult.Status)
-                return;
-
-            AudioFileInputNode = fileInputResult.FileInputNode;
-            AudioFileInputNode.AddOutgoingConnection(outputNode);
-            AudioFileInputNode.Stop();
-
-            AudioFileInputNode.Reset();
-
-            Duration = AudioFileInputNode.Duration;
+            Duration = audioFileInputNode.Duration;
             StartPosition = TimeSpan.Zero;
-            EndPosition = AudioFileInputNode.Duration;
-            PlaybackSpeed = AudioFileInputNode.PlaybackSpeedFactor * 100;
-            Volume = AudioFileInputNode.OutgoingGain * 100;
-            Filename = Path.GetFileName(filename);
+            EndPosition = audioFileInputNode.Duration;
+            PlaybackSpeed = audioFileInputNode.PlaybackSpeedFactor * 100;
+            Volume = audioFileInputNode.OutgoingGain * 100;
+            
+            Filename = Path.GetFileName(audioFileInputNode.SourceFile.DisplayName);
+            Id = id;
         }
 
-//        public async Task LoadAudio(StorageFile file) {
-//                        CreateAudioFileInputNodeResult fileInputResult = await audioGraph.CreateFileInputNodeAsync(file);
-//            if (AudioFileNodeCreationStatus.Success != fileInputResult.Status)
-//                return;
-//
-//            AudioFileInputNode = fileInputResult.FileInputNode;
-//            AudioFileInputNode.AddOutgoingConnection(outputNode);
-//            AudioFileInputNode.Stop();
-//
-//            AudioFileInputNode.Reset();
-//
-//            Duration = AudioFileInputNode.Duration;
-//            StartPosition = TimeSpan.Zero;
-//            EndPosition = AudioFileInputNode.Duration;
-//            PlaybackSpeed = AudioFileInputNode.PlaybackSpeedFactor * 100;
-//            Volume = AudioFileInputNode.OutgoingGain * 100;
-//            Filename = Path.GetFileName(filename);
-//        }
+        public object Id { get; private set; }
+
+        private AudioFileInputNode audioFileInputNode;
 
         public void Reset() {
             StartPosition = TimeSpan.Zero;
-            EndPosition = AudioFileInputNode.Duration;
+            EndPosition = audioFileInputNode.Duration;
             PlaybackSpeed = 100;
             Volume = 100;
         }
 
         public void Dispose() {
-            AudioFileInputNode?.Stop();
-            AudioFileInputNode?.Dispose();
-            AudioFileInputNode = null;
+            audioFileInputNode?.Stop();
+            audioFileInputNode?.Dispose();
+            audioFileInputNode = null;
         }
 
         public void Play() {
-            if (AudioFileInputNode == null)
+            if (audioFileInputNode == null)
                 return;
 
-            AudioFileInputNode.Reset();
-            AudioFileInputNode.StartTime = startPosition;
-            AudioFileInputNode.EndTime = endPosition;
-            AudioFileInputNode.Start();
+            audioFileInputNode.Reset();
+            audioFileInputNode.StartTime = startPosition;
+            audioFileInputNode.EndTime = endPosition;
+            audioFileInputNode.Start();
         }
 
 
@@ -124,10 +97,10 @@ namespace Beats.ViewModels {
 
                 volume = value;
 
-                if (AudioFileInputNode == null)
+                if (audioFileInputNode == null)
                     return;
 
-                AudioFileInputNode.OutgoingGain = value / 100.0;
+                audioFileInputNode.OutgoingGain = value / 100.0;
             }
         }
 
@@ -153,10 +126,10 @@ namespace Beats.ViewModels {
                     return;
                 playbackSpeed = value;
                 RaisePropertyChanged();
-                if (AudioFileInputNode == null)
+                if (audioFileInputNode == null)
                     return;
 
-                AudioFileInputNode.PlaybackSpeedFactor = value / 100.0;
+                audioFileInputNode.PlaybackSpeedFactor = value / 100.0;
 
             }
         }

@@ -22,7 +22,7 @@
         <audioControls:SpeechModule Grid.Row="1" Grid.Column="0" />
         <audioControls:PianoToMidiOut Grid.Row="2" Grid.Column="0" />
         <applicationControls:OutputSelectionControl OutputDeviceSelectionChanged="OutputSelectionControl_OnOutputDeviceSelectionChanged" Grid.Row="0" Grid.Column="1"/>
-        <audioControls:AudioNodePropertyModifierControl x:Name="AudioNodePropertyModifierControl" Grid.Row="2" Grid.Column="1"/>
+        <audioControls:AudioNodePropertyModifierControl x:Name="AudioNodePropertyModifierControl" Grid.Row="2" Grid.Column="1" PickNewAudioFile="AudioNodePropertyModifierControl_OnPickNewAudioFile"/>
     </Grid>
 </Page>
 

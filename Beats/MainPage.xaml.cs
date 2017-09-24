@@ -36,5 +36,21 @@ namespace Beats {
             AudioNodePropertyModifierControl.DataContext = e;
         }
 
+        private async void AudioNodePropertyModifierControl_OnPickNewAudioFile(object sender, object e) {
+                
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".wav");
+            picker.FileTypeFilter.Add(".mp3");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file == null)
+                return;
+
+
+            await PadGrid.LoadAudio((sender as AudioFileInputNodeViewModel).Id, file);
+        }
+
     }
 }

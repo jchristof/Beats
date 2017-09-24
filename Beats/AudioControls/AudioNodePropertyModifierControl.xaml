@@ -28,7 +28,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{Binding Filename}"/>
-            <Button Grid.Column="1" Content="..." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PickAudioFile"/>
+            <Button Grid.Column="1" Content="..." HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PickNewAudioFileDialog"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

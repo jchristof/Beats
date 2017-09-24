@@ -27,18 +27,10 @@ namespace Beats.AudioControls {
             ViewModel?.Reset();
         }
 
-        private async void PickAudioFile(object sender, RoutedEventArgs e) {
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-            picker.FileTypeFilter.Add(".wav");
-            picker.FileTypeFilter.Add(".mp3");
+        public event EventHandler<object> PickNewAudioFile = delegate { };
 
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
-            if (file == null)
-                return;
-
-            //ViewModel.LoadAudioFile()
+        private void PickNewAudioFileDialog(object sender, RoutedEventArgs e) {
+            PickNewAudioFile(ViewModel, e);
         }
     }
 }
