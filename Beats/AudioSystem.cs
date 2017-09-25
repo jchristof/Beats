@@ -42,6 +42,12 @@ namespace Beats {
             }
 
             DeviceOutput = deviceOutputNodeResult.DeviceOutputNode;
+
+            var echo = new EchoEffectDefinition(AudioGraph);
+            echo.Delay = 409;
+            echo.Feedback = 0.5;
+            echo.WetDryMix = 0.6;
+            DeviceOutput.EffectDefinitions.Add(echo);
             AudioGraph.Start();
         }
 
