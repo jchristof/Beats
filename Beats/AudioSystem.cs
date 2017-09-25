@@ -3,9 +3,12 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Devices.Enumeration;
+using Windows.Foundation.Collections;
 using Windows.Media.Audio;
+using Windows.Media.Effects;
 using Windows.Storage;
 using Windows.UI.Core;
+using CustomEffects;
 
 namespace Beats {
     public class AudioSystem : IDisposable{
@@ -48,6 +51,13 @@ namespace Beats {
             echo.Feedback = 0.5;
             echo.WetDryMix = 0.6;
             DeviceOutput.EffectDefinitions.Add(echo);
+
+            var propertySet = new PropertySet();
+            propertySet["Pattern"] = new float[] {1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0};
+            propertySet["Tempo"] = 110.0f;
+
+            var tranceGate = new AudioEffectDefinition(typeof(TranceGateEffect).FullName, propertySet);
+            DeviceOutput.EffectDefinitions.Add(tranceGate);
             AudioGraph.Start();
         }
 
