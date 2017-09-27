@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
+using Windows.Media.Audio;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Beats.Dialogs;
@@ -20,7 +21,10 @@ namespace Beats {
         private AudioSystem audioSystem = new AudioSystem();
 
         private async Task InitAudioGraph(DeviceInformation outputDevice) {
-            await audioSystem.Create(outputDevice);
+            AudioGraphSettings settings = new AudioGraphSettings(Windows.Media.Render.AudioRenderCategory.Media);
+            settings.PrimaryRenderDevice = outputDevice;
+
+            await audioSystem.Create(settings);
 
             StorageFolder audioFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\audio");
             await audioSystem.LoadAudio(audioFolder);

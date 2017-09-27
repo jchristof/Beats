@@ -17,9 +17,7 @@ namespace Beats {
         public AudioDeviceOutputNode DeviceOutput { get; set; }
         private FrameNode FrameNode { get; set; }
 
-        public async Task Create(DeviceInformation outputDevice) {
-            AudioGraphSettings settings = new AudioGraphSettings(Windows.Media.Render.AudioRenderCategory.Media);
-            settings.PrimaryRenderDevice = outputDevice;
+        public async Task Create(AudioGraphSettings settings) {
             CreateAudioGraphResult result = await AudioGraph.CreateAsync(settings);
 
             if (result.Status != AudioGraphCreationStatus.Success) {
@@ -45,7 +43,10 @@ namespace Beats {
             }
 
             DeviceOutput = deviceOutputNodeResult.DeviceOutputNode;
+            AudioGraph.Start();
+        }
 
+        public void AddEffects() {
             var echo = new EchoEffectDefinition(AudioGraph);
             echo.Delay = 409;
             echo.Feedback = 0.5;
@@ -53,12 +54,11 @@ namespace Beats {
             DeviceOutput.EffectDefinitions.Add(echo);
 
             var propertySet = new PropertySet();
-            propertySet["Pattern"] = new float[] {1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0};
+            propertySet["Pattern"] = new float[] { 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 };
             propertySet["Tempo"] = 110.0f;
 
             var tranceGate = new AudioEffectDefinition(typeof(TranceGateEffect).FullName, propertySet);
             DeviceOutput.EffectDefinitions.Add(tranceGate);
-            AudioGraph.Start();
         }
 
         public async Task LoadAudio(StorageFolder storageFolder) {
