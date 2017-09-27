@@ -140,6 +140,9 @@
     <Compile Include="AudioControls\SpeechModule.xaml.cs">
       <DependentUpon>SpeechModule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecordPlaybackLoopPage.xaml.cs">
+      <DependentUpon>RecordPlaybackLoopPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpeechNode.cs" />
     <Compile Include="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
@@ -207,6 +210,10 @@
     <Page Include="AudioControls\PianoToMidiOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RecordPlaybackLoopPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ResourceStyles.xaml">
       <SubType>Designer</SubType>
