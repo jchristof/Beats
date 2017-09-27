@@ -308,6 +308,7 @@ namespace Beats {
 
         // We keep a 1MB AudioFrame and reuse it.
         static AudioFrame s_audioFrame = new Windows.Media.AudioFrame(1024 * 1024);
+        static float[] rawAudio = new float[1024*1024*20]; 
 
         private int s_zeroByteOutgoingFrameCount;
 
@@ -371,6 +372,8 @@ namespace Beats {
                             *dest++ = *src++;
                         }
                     }
+
+                    Buffer.BlockCopy(byteBuffer, 0, rawAudio , 0, byteBuffer.Length);
                     currentIndexInBytes += bytesInThisIteration;
                     positionInBytes += bytesInThisIteration;
 
