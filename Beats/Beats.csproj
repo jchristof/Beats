@@ -106,6 +106,10 @@
       <DependentUpon>AudioNodePropertyModifierControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="AudioControls\Dial.cs" />
+    <Compile Include="AudioControls\RecordFromInput.xaml.cs">
+      <DependentUpon>RecordFromInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AudioControls\RecordFromInputViewModel.cs" />
     <Compile Include="AudioGenerator.cs" />
     <Compile Include="AudioSystem.cs" />
     <Compile Include="BeatType.cs" />
@@ -143,6 +147,7 @@
     <Compile Include="RecordPlaybackLoopPage.xaml.cs">
       <DependentUpon>RecordPlaybackLoopPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecordToMemoryModule.cs" />
     <Compile Include="SpeechNode.cs" />
     <Compile Include="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
@@ -184,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AudioControls\KeyboardToAudioFrameOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AudioControls\RecordFromInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
