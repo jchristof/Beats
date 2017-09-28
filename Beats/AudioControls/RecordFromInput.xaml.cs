@@ -12,8 +12,9 @@ namespace Beats.AudioControls
     {
         public RecordFromInput()
         {
-            this.InitializeComponent();
             DataContext = new RecordFromInputViewModel();
+            this.InitializeComponent();
+            
             Create();
         }
 

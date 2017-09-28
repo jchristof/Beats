@@ -11,14 +11,14 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding RecordingDevices}"
                  SelectedItem="{Binding SelectedInputDevice, Mode=TwoWay}"
                  DisplayMemberPath="Name"
                  Margin="10"/>
-        <StackPanel>
+        <StackPanel  Grid.Row="1">
             <Button Content="{Binding TransportAction}" Click="ButtonBase_OnClick"></Button>
         </StackPanel>
     </Grid>
