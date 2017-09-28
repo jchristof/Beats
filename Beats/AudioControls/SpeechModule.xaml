@@ -9,10 +9,13 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <StackPanel>
-        
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <MediaElement x:Name="MediaElement"></MediaElement>
-        <TextBox x:Name="Text"></TextBox>
-        <Button Click="Button_Click"></Button>
-    </StackPanel>
+        <TextBox x:Name="Text" HorizontalAlignment="Stretch"></TextBox>
+        <Button Content="Speak" Click="Button_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
+    </Grid>
 </UserControl>
