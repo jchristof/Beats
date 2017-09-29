@@ -28,6 +28,8 @@ namespace Beats {
 
             StorageFolder audioFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync(@"Assets\audio");
             await audioSystem.LoadAudio(audioFolder);
+
+            await RecordFromInput.CreateAsync(audioSystem);
         }
 
         private void PadGrid_OnAudioFileSelected(object sender, AudioFileInputNodeViewModel e) {

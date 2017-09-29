@@ -35,9 +35,28 @@ namespace Beats
 
             frameOutputNode = audioSystem.AudioGraph.CreateFrameOutputNode();
             deviceInputNode.AddOutgoingConnection(frameOutputNode);
+            deviceInputNode.Stop();
+            frameOutputNode.Stop();
 
             audioSystem.AudioGraph.QuantumStarted += AudioGraph_QuantumStarted;
             audioSystem.AudioGraph.UnrecoverableErrorOccurred += AudioGraph_UnrecoverableErrorOccurred;
+
+            //memory to audio out
+            frameInputNode = audioSystem.AudioGraph.CreateFrameInputNode();
+            frameInputNode.AddOutgoingConnection(audioSystem.DeviceOutput);
+            frameInputNode.QuantumStarted += FrameInputNode_QuantumStarted;
+            frameInputNode.Stop();
+        }
+
+        public void Start() {
+            deviceInputNode.Start();
+            frameOutputNode.Start();
+        }
+
+        public void Stop() {
+            deviceInputNode.Stop();
+            frameOutputNode.Stop();
+            frameInputNode.Start();
         }
 
         private async void AudioGraph_UnrecoverableErrorOccurred(AudioGraph sender, AudioGraphUnrecoverableErrorOccurredEventArgs args) {
@@ -106,6 +125,77 @@ namespace Beats
             }
 
             audioFrameCount++;
+        }
+
+        static AudioFrame s_audioFrame = new Windows.Media.AudioFrame(1024 * 1024);
+        //static float[] rawAudio = new float[1024 * 1024 * 20];
+
+        private int s_zeroByteOutgoingFrameCount;
+        // Current record/play index into the buffer.
+        uint currentIndexInBytes;
+
+        private unsafe void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args) {
+            uint requiredSamples = (uint)args.RequiredSamples;
+
+            if (requiredSamples == 0) {
+                s_zeroByteOutgoingFrameCount++;
+                return;
+            }
+
+            using (AudioBuffer buffer = s_audioFrame.LockBuffer(AudioBufferAccessMode.Write))
+            using (IMemoryBufferReference reference = buffer.CreateReference()) {
+                byte* dataInBytes;
+                uint capacityInBytes;
+
+                // Get the buffer from the AudioFrame
+                ((IMemoryBufferByteAccess)reference).GetBuffer(out dataInBytes, out capacityInBytes);
+
+                // Return just the required number of samples.
+                uint bytesRemaining = requiredSamples << 3;
+                // Or, alternatively, comment out the line above and uncomment this one, to return a full buffer's worth of data.
+                // This results in far fewer callbacks to the application, which is desirable if there is no need for low-latency
+                // varying audio rendering.
+                // uint bytesRemaining = capacityInBytes;
+
+                buffer.Length = bytesRemaining;
+
+                uint positionInBytes = 0;
+
+                // As long as there are more bytes remaining in the dataInBytes buffer, copy from
+                // our buffer (wrapping back to the start if the end is reached, i.e. looping).
+                while (bytesRemaining > 0) {
+                    uint bytesInThisIteration = bytesRemaining;
+                    if (currentIndexInBytes + bytesRemaining > maxIndexInBytes) {
+                        bytesInThisIteration = maxIndexInBytes - currentIndexInBytes;
+                        if (bytesInThisIteration == 0) {
+                            // wraparound; next iteration will get more bytes
+                            currentIndexInBytes = 0;
+                            continue;
+                        }
+                    }
+
+                    // Now copy bytesInThisIteration bytes into the output.
+                    fixed (byte* bufOfBytes = byteBuffer) {
+                        // CopyMemory(dataInBytes + positionInBytes, bufOfBytes + currentIndexInBytes, bytesInThisIteration);
+
+                        long* dest = ((long*)dataInBytes) + (positionInBytes / sizeof(long));
+                        long* src = ((long*)bufOfBytes) + (currentIndexInBytes / sizeof(long));
+                        long* srcEnd = ((long*)src) + (bytesInThisIteration / sizeof(long));
+
+                        while (src < srcEnd) {
+                            *dest++ = *src++;
+                        }
+                    }
+
+                    //Buffer.BlockCopy(byteBuffer, 0, rawAudio, 0, byteBuffer.Length);
+                    currentIndexInBytes += bytesInThisIteration;
+                    positionInBytes += bytesInThisIteration;
+
+                    bytesRemaining -= bytesInThisIteration;
+                }
+            }
+
+            frameInputNode.AddFrame(s_audioFrame);
         }
     }
 }

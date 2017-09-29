@@ -14,12 +14,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding RecordingDevices}"
+        <ComboBox ItemsSource="{Binding RecordingDevices}"
                  SelectedItem="{Binding SelectedInputDevice, Mode=TwoWay}"
                  DisplayMemberPath="Name"
-                 Margin="10"/>
-        <StackPanel  Grid.Row="1">
-            <Button Content="{Binding TransportAction}" Click="ButtonBase_OnClick"></Button>
+                 HorizontalAlignment="Stretch"
+                  />
+        <StackPanel Orientation="Horizontal"  Grid.Row="1">
+            <Button x:Name="Create" Content="Create" Click="Create_Click" />
+            <Button x:Name="Transport" Content="Record" Click="ButtonBase_OnClick"></Button>
         </StackPanel>
     </Grid>
 </UserControl>
