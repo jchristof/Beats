@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Beats.Midi.MidiSelector"
+    x:Class="AudioSystem.Midi.MidiInSelector"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Beats.Midi"
@@ -12,11 +12,6 @@
     >
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <ComboBox x:Name="midiInPortListBox" Grid.Column="0" SelectionChanged="midiInPortListBox_SelectionChanged" PlaceholderText="Select Midi In" HorizontalAlignment="Stretch"/>
-        <ComboBox x:Name="midiOutPortListBox" Grid.Column="1" SelectionChanged="midiOutPortListBox_SelectionChanged" PlaceholderText="Select Midi Out" HorizontalAlignment="Stretch"/>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Media.Audio;
@@ -31,6 +32,7 @@ namespace Beats {
 
             await RecordFromInput.CreateAsync(audioSystem);
         }
+
 
         private void PadGrid_OnAudioFileSelected(object sender, AudioFileInputNodeViewModel e) {
             AudioNodePropertyModifierControl.DataContext = e;

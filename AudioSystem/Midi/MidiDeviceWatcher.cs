@@ -1,11 +1,10 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 using Windows.Devices.Enumeration;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 
-namespace Beats.Midi
+namespace AudioSystem.Midi
 {
     public class MidiDeviceWatcher
     {
