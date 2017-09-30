@@ -101,14 +101,17 @@ namespace Beats.AudioControls {
             knob = ((Grid)GetTemplateChild("Knob"));
             value = ((RotateTransform)GetTemplateChild("DialValue"));
             if (Minimum > 0 && Minimum < 360) { setPosition(Minimum); }
+
             knob.PointerReleased += (object sender, PointerRoutedEventArgs e) =>
             {
                 hasCapture = false;
+                (sender as UIElement).ReleasePointerCapture(e.Pointer);
             };
             knob.PointerPressed += (object sender, PointerRoutedEventArgs e) =>
             {
                 hasCapture = true;
                 setPosition(getAngle(e.GetCurrentPoint(knob).Position));
+                bool _hasCapture = (sender as UIElement).CapturePointer(e.Pointer);
             };
             knob.PointerMoved += (object sender, PointerRoutedEventArgs e) =>
             {
@@ -118,7 +121,7 @@ namespace Beats.AudioControls {
             };
             knob.PointerExited += (object sender, PointerRoutedEventArgs e) =>
             {
-                hasCapture = false;
+                //hasCapture = false;
             };
         }
     }
