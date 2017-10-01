@@ -8,24 +8,22 @@ namespace AudioSystem.Midi
 {
     public class MidiDeviceWatcher
     {
-        public MidiDeviceWatcher(string midiDeviceSelectorString, ComboBox midiDeviceListBox, CoreDispatcher dispatcher) {
-            deviceListBox = midiDeviceListBox;
+        public MidiDeviceWatcher(string midiDeviceSelectorString, ComboBox deviceListControl, CoreDispatcher dispatcher) {
+            this.midiDeviceSelectorString = midiDeviceSelectorString;
+            this.deviceListControl = deviceListControl;
             coreDispatcher = dispatcher;
 
-            deviceSelectorString = midiDeviceSelectorString;
-
-            deviceWatcher = DeviceInformation.CreateWatcher(deviceSelectorString);
+            deviceWatcher = DeviceInformation.CreateWatcher(midiDeviceSelectorString);
             deviceWatcher.Added += DeviceWatcher_Added;
             deviceWatcher.Removed += DeviceWatcher_Removed;
             deviceWatcher.Updated += DeviceWatcher_Updated;
             deviceWatcher.EnumerationCompleted += DeviceWatcher_EnumerationCompleted;
         }
 
-        DeviceWatcher deviceWatcher;
-        string deviceSelectorString;
-        ComboBox deviceListBox;
-        CoreDispatcher coreDispatcher;
-
+        private DeviceWatcher deviceWatcher;
+        private readonly ComboBox deviceListControl;
+        private readonly CoreDispatcher coreDispatcher;
+        private readonly string midiDeviceSelectorString;
         public DeviceInformationCollection DeviceInformationCollection { get; set; }
 
         public void StartWatcher() {
@@ -44,49 +42,33 @@ namespace AudioSystem.Midi
         }
 
         private async void DeviceWatcher_Removed(DeviceWatcher sender, DeviceInformationUpdate args) {
-            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            {
-                // Update the device list
-                UpdateDevices();
-            });
+            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, UpdateDevices);
         }
 
         private async void DeviceWatcher_Added(DeviceWatcher sender, DeviceInformation args) {
-            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            {
-                // Update the device list
-                UpdateDevices();
-            });
+            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, UpdateDevices);
         }
 
         private async void DeviceWatcher_EnumerationCompleted(DeviceWatcher sender, object args) {
-            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            {
-                // Update the device list
-                UpdateDevices();
-            });
+            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, UpdateDevices);
         }
 
         private async void DeviceWatcher_Updated(DeviceWatcher sender, DeviceInformationUpdate args) {
-            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            {
-                // Update the device list
-                UpdateDevices();
-            });
+            await coreDispatcher.RunAsync(CoreDispatcherPriority.High, UpdateDevices);
         }
 
         private async void UpdateDevices() {
             // Get a list of all MIDI devices
-            this.DeviceInformationCollection = await DeviceInformation.FindAllAsync(deviceSelectorString);
+            DeviceInformationCollection = await DeviceInformation.FindAllAsync(midiDeviceSelectorString);
 
-            deviceListBox.Items.Clear();
+            deviceListControl?.Items?.Clear();
 
-            if (!this.DeviceInformationCollection.Any()) {
-                deviceListBox.Items.Add("No MIDI devices found!");
+            if (!DeviceInformationCollection.Any()) {
+                deviceListControl?.Items?.Add("No MIDI devices found!");
             }
 
-            foreach (var deviceInformation in this.DeviceInformationCollection) {
-                deviceListBox.Items.Add(deviceInformation.Name);
+            foreach (var deviceInformation in DeviceInformationCollection) {
+                deviceListControl?.Items?.Add(deviceInformation.Name);
             }
         }
     }

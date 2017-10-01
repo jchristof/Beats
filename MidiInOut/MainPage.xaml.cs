@@ -5,16 +5,13 @@ using Windows.Devices.Enumeration;
 using Windows.Devices.Midi;
 using Windows.UI.Core;
 
-namespace MidiInOut
-{
+namespace MidiInOut {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage 
-    {
-        public MainPage()
-        {
-           InitializeComponent();
+    public sealed partial class MainPage {
+        public MainPage() {
+            InitializeComponent();
         }
 
         private MidiInPort midiInPort;
@@ -30,27 +27,6 @@ namespace MidiInOut
             midiInPort.MessageReceived += MidiInPort_MessageReceived;
         }
 
-        private async void MidiInPort_MessageReceived(MidiInPort sender, MidiMessageReceivedEventArgs args) {
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                CoreDispatcherPriority.Normal,
-                    () => {
-                        IMidiMessage receivedMidiMessage = args.Message;
-
-                        System.Diagnostics.Debug.WriteLine(receivedMidiMessage.Timestamp.ToString());
-
-                        if (receivedMidiMessage.Type == MidiMessageType.NoteOn) {
-                            MidiNoteOnMessage noteOnMessage = (MidiNoteOnMessage)receivedMidiMessage;
-                            midiOutPort?.SendMessage(noteOnMessage);
-                            TextBox.Text = $"Note on {noteOnMessage.Channel} {noteOnMessage.Note} {noteOnMessage.Velocity}" + Environment.NewLine + TextBox.Text;
-                        }
-                        else if (receivedMidiMessage.Type == MidiMessageType.NoteOff) {
-                            MidiNoteOffMessage noteOffMessage = (MidiNoteOffMessage)receivedMidiMessage;
-                            midiOutPort?.SendMessage(noteOffMessage);
-                            TextBox.Text = $"Note off {noteOffMessage.Channel} {noteOffMessage.Note} " + Environment.NewLine + TextBox.Text;
-                        }
-                    });
-        }
-
         private async void MidiOutSelector_OnDeviceSelectedEvent(object sender, DeviceInformation e) {
 
             midiOutPort = await MidiOutPort.FromIdAsync(e.Id);
@@ -60,5 +36,24 @@ namespace MidiInOut
             }
         }
 
+        private async void MidiInPort_MessageReceived(MidiInPort sender, MidiMessageReceivedEventArgs args) {
+            midiOutPort?.SendMessage(args.Message);
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal,
+                    () => {
+                        IMidiMessage receivedMidiMessage = args.Message;
+
+                        System.Diagnostics.Debug.WriteLine(receivedMidiMessage.Timestamp.ToString());
+
+                        if (receivedMidiMessage.Type == MidiMessageType.NoteOn) {
+                            MidiNoteOnMessage noteOnMessage = (MidiNoteOnMessage)receivedMidiMessage;
+                            TextBox.Text = $"Note on {noteOnMessage.Channel} {noteOnMessage.Note} {noteOnMessage.Velocity}" + Environment.NewLine + TextBox.Text;
+                        }
+                        else if (receivedMidiMessage.Type == MidiMessageType.NoteOff) {
+                            MidiNoteOffMessage noteOffMessage = (MidiNoteOffMessage)receivedMidiMessage;
+                            TextBox.Text = $"Note off {noteOffMessage.Channel} {noteOffMessage.Note} " + Environment.NewLine + TextBox.Text;
+                        }
+                    });
+        }
     }
 }

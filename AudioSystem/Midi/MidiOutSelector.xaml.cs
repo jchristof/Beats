@@ -17,7 +17,9 @@ namespace AudioSystem.Midi {
         public event EventHandler<DeviceInformation> DeviceSelectedEvent = delegate { };
 
         private void MidiSelector_OnLoaded(object sender, RoutedEventArgs e) {
-            outputDeviceWatcher = new MidiDeviceWatcher(MidiOutPort.GetDeviceSelector(), MidiOutPortSelector, Dispatcher);
+            outputDeviceWatcher =
+                new MidiDeviceWatcher(MidiOutPort.GetDeviceSelector(), MidiOutPortSelector, Dispatcher);
+
             outputDeviceWatcher.StartWatcher();
         }
 

@@ -1,13 +1,11 @@
 ﻿
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Media.Audio;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Beats.Dialogs;
-using Beats.Events;
 using Beats.ViewModels;
 
 namespace Beats {
@@ -46,7 +44,7 @@ namespace Beats {
             picker.FileTypeFilter.Add(".wav");
             picker.FileTypeFilter.Add(".mp3");
 
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file == null)
                 return;
 
