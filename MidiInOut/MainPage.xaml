@@ -9,7 +9,14 @@
     xmlns:midi1="using:AudioSystem.Midi"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <midi1:MidiInSelector DeviceSelectedEvent="MidiInSelector_OnDeviceSelectedEvent"/>
+        <midi1:MidiOutSelector Grid.Row="1" DeviceSelectedEvent="MidiOutSelector_OnDeviceSelectedEvent"/>
+        <TextBlock x:Name="TextBox" Grid.Row="2" TextWrapping="Wrap"></TextBlock>
     </Grid>
 </Page>

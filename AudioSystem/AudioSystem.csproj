@@ -111,6 +111,9 @@
     <Compile Include="Midi\MidiInSelector.xaml.cs">
       <DependentUpon>MidiInSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Midi\MidiOutSelector.xaml.cs">
+      <DependentUpon>MidiOutSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\AudioSystem.rd.xml" />
   </ItemGroup>
@@ -124,6 +127,10 @@
     <Page Include="Midi\MidiInSelector.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Midi\MidiOutSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
