@@ -2,7 +2,6 @@
     x:Class="AudioSystem.Midi.MidiInSelector"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Beats.Midi"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -10,5 +9,5 @@
     d:DesignWidth="400"
     Loaded="MidiSelector_OnLoaded"
     >
-    <ComboBox x:Name="MidiInPortListBox" Grid.Column="0" SelectionChanged="SelectionChanged" PlaceholderText="Select Midi In" HorizontalAlignment="Stretch"/>
+    <ComboBox x:Name="MidiInPortListBox" SelectionChanged="SelectionChanged" PlaceholderText="Select Midi In" HorizontalAlignment="Stretch"/>
 </UserControl>
