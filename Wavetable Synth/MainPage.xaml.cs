@@ -22,7 +22,8 @@ namespace Wavetable_Synth {
 
     public sealed partial class MainPage {
         public MainPage() {
-            InitializeComponent();          
+            InitializeComponent();
+            //this.radChart.DataContext = new double[] { 20, 30, 50, 10, 60, 40, 20, 80 };
         }
 
         private AudioSystem.AudioSystem audioSystem;
@@ -65,6 +66,7 @@ namespace Wavetable_Synth {
             frameInputNode.QuantumStarted += FrameInputNode_QuantumStarted;
 
             CreateWaveTables();
+            this.radChart.DataContext = sinTable;
         }
 
         private void FrameInputNode_QuantumStarted(AudioFrameInputNode sender, FrameInputNodeQuantumStartedEventArgs args) {
@@ -76,7 +78,7 @@ namespace Wavetable_Synth {
             frameInputNode.AddFrame(audioData);
         }
 
-        unsafe private AudioFrame GenerateAudioData(uint samples) {
+        private unsafe AudioFrame GenerateAudioData(uint samples) {
             var bufferSize = samples * sizeof(float);
             var frame = new AudioFrame(bufferSize);
 
