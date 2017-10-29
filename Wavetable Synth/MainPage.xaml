@@ -2,25 +2,25 @@
     x:Class="Wavetable_Synth.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Wavetable_Synth"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:midi="using:AudioSystem.Midi"
-    xmlns:chart="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Loaded="MainPage_OnLoaded"
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <midi:MidiInSelector DeviceSelectedEvent="MidiInSelector_OnDeviceSelectedEvent"/>
-        <chart:RadCartesianChart  x:Name="radChart">
-            <chart:RadCartesianChart.HorizontalAxis>
-                <chart:CategoricalAxis/>
-            </chart:RadCartesianChart.HorizontalAxis>
-            <chart:RadCartesianChart.VerticalAxis>
-                <chart:LinearAxis/>
-            </chart:RadCartesianChart.VerticalAxis>
-            <chart:LineSeries ItemsSource="{Binding}"/>
-        </chart:RadCartesianChart>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <midi:MidiInSelector DeviceSelectedEvent="MidiInSelector_OnDeviceSelectedEvent" />
+        <xaml:CanvasControl x:Name="SinView" Draw="Sin_Draw" ClearColor="BurlyWood" Grid.Row="1" PointerPressed="SinView_OnPointerPressed"/>
+        <xaml:CanvasControl x:Name="SawView" Draw="Saw_Draw" ClearColor="DarkKhaki" Grid.Row="2" PointerPressed="SawView_OnPointerPressed"/>
+        <xaml:CanvasControl x:Name="NoiseView" Draw="Noise_Draw" ClearColor="DarkSeaGreen" Grid.Row="3" PointerPressed="NoiseView_OnPointerPressed"/>
     </Grid>
 </Page>
+
