@@ -106,7 +106,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="IntPicker.xaml.cs">
       <DependentUpon>IntPicker.xaml</DependentUpon>
     </Compile>
