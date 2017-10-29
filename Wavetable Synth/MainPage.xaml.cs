@@ -131,13 +131,17 @@ namespace Wavetable_Synth {
         private double desiredFrequency;
         private int activeNotes;
 
+        private double A_NOTE_FREQ = 440.0;
+        private double A_NOTE_MIDI = 69;
+        private int NOTES_PER_OCTAVE = 12;
+
         //process note on and off midi messages
         private void MidiInPortOnMessageReceived(MidiInPort sender, MidiMessageReceivedEventArgs args) {
             IMidiMessage receivedMidiMessage = args.Message;
 
             if (receivedMidiMessage.Type == MidiMessageType.NoteOn) {
                 MidiNoteOnMessage noteOnMessage = (MidiNoteOnMessage)receivedMidiMessage;
-                desiredFrequency = 440.0 * Math.Pow(2.0, (noteOnMessage.Note - 69.0) / 12);
+                desiredFrequency = A_NOTE_FREQ * Math.Pow(2.0, (noteOnMessage.Note - A_NOTE_MIDI) / NOTES_PER_OCTAVE);
                 activeNotes++;
                 if (activeNotes == 1)
                     frameInputNode.Start();
