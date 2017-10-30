@@ -6,13 +6,14 @@ using Windows.Media.Audio;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Beats.Dialogs;
+using Beats.Pages;
 using Beats.ViewModels;
 
 namespace Beats {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage {
+    public sealed partial class MainPage : BasePage {
         public MainPage() {
             InitializeComponent();
         }

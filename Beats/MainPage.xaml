@@ -1,4 +1,4 @@
-﻿<Page
+﻿<pages:BasePage
     x:Class="Beats.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:applicationControls="using:Beats.ApplicationControls"
     xmlns:audioControls="using:Beats.AudioControls"
+    xmlns:page="using:Beats.Page"
+    xmlns:pages="using:Beats.Pages"
     mc:Ignorable="d"
     Loaded="MainPage_OnLoaded"
     >
@@ -34,7 +36,31 @@
             </audioControls:Dial.Knob>
         </audioControls:Dial>
     </Grid>
-</Page>
+</pages:BasePage>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

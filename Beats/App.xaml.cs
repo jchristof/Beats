@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace Beats
@@ -28,9 +19,11 @@ namespace Beats
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
+
+        public static Frame RootFrame => Window.Current.Content as Frame;
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -66,10 +59,24 @@ namespace Beats
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(StartPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+                SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            }
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e) {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+                return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (rootFrame.CanGoBack && e.Handled == false) {
+                e.Handled = true;
+                rootFrame.GoBack();
             }
         }
 
